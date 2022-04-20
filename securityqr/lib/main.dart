@@ -6,6 +6,7 @@ import 'package:securityqr/admin/admin_anasayfa.dart';
 import 'package:securityqr/admin/admin_giris.dart';
 import 'package:securityqr/admin/kullanicilar.dart';
 import 'package:securityqr/admin/admin_son_hareketler.dart';
+import 'admin/admin_bilgi_guncelle.dart';
 
 import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
 import 'kullanici/kullanici_giris.dart';
@@ -32,6 +33,7 @@ void main() {
       "admin_giris": (context) => admin_giris(),
       "admin_son_hareketler":(context)=> admin_son_hareketler(),
       "kullanicilar":(context) => kullanicilar(),
+      "admin_bilgi_guncelle":(context) => admin_bilgi_guncelle(),
     }));
 }
 

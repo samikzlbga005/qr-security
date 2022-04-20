@@ -58,7 +58,7 @@ class _admin_anasayfa extends State<admin_anasayfa>{
               color: Colors.blue,
               child: Text("Bilgileri Güncelle",style: TextStyle(fontSize: 18,color: Colors.white),),
               onPressed: (){
-                
+                Navigator.pushNamed(context, "admin_bilgi_guncelle");
               },
               ),
             ),
