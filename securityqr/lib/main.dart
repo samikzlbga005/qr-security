@@ -6,8 +6,10 @@ import 'package:securityqr/admin/admin_anasayfa.dart';
 import 'package:securityqr/admin/admin_giris.dart';
 import 'package:securityqr/admin/kullanicilar.dart';
 import 'package:securityqr/admin/admin_son_hareketler.dart';
+import 'package:securityqr/kullanici/qr_olustur.dart';
 import 'admin/admin_bilgi_guncelle.dart';
 import 'admin/qr_oku.dart';
+import 'admin/kullaniciyi_gor.dart';
 
 
 import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
@@ -29,6 +31,7 @@ void main() async{
       "kullanici_son_hareketler": (context) => kullanici_son_hareketler(), 
       "kullanici_bilgi_guncelle": (context) => kullanici_bilgi_guncelle(),
       "sifremi_unuttum": (context) => sifremi_unuttum(),
+      "qr_olustur": (context)=> qr_olustur(),
       //admin kısmı
 
       "admin_anasayfa": (context) => admin_anasayfa(),
@@ -37,6 +40,7 @@ void main() async{
       "kullanicilar":(context) => kullanicilar(),
       "admin_bilgi_guncelle":(context) => admin_bilgi_guncelle(),
       "qr_oku":(context) => qr_oku(),
+      "kullaniciyi_gor":(context) => kullaniciyi_gor(),
     }));
 }
 

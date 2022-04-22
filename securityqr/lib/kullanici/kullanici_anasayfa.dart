@@ -8,6 +8,7 @@ class kullanici_anasayfa extends StatefulWidget{
 //
 
 class _kullanici_anasayfa extends State<kullanici_anasayfa>{
+  bool a = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class _kullanici_anasayfa extends State<kullanici_anasayfa>{
             ),
             Container(
               padding: EdgeInsets.fromLTRB(5,0,5,0),
-              height: 220,
+              height: 200,
               width: double.maxFinite,
               child: Card(
                 color: Colors.amber,
@@ -46,7 +47,7 @@ class _kullanici_anasayfa extends State<kullanici_anasayfa>{
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top:15),
+              padding: EdgeInsets.only(top:10),
               child: FlatButton(
               color: Colors.blue,
               child: Text("Son Hareketler",style: TextStyle(fontSize: 18,color: Colors.white),),
@@ -61,6 +62,19 @@ class _kullanici_anasayfa extends State<kullanici_anasayfa>{
               child: Text("Bilgileri Güncelle",style: TextStyle(fontSize: 18,color: Colors.white),),
               onPressed: (){
                 Navigator.pushNamed(context, "kullanici_bilgi_guncelle");
+              },
+              ),
+            ),
+            Container(
+              child: FlatButton(
+              color: Colors.blue,
+              child: Text("QR oluştur",style: TextStyle(fontSize: 18,color: Colors.white),),
+              onPressed: (){
+                if(a)
+                {
+                  Navigator.pushNamed(context, "qr_olustur");
+                  a = false;
+                }
               },
               ),
             ),

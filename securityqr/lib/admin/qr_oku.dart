@@ -65,10 +65,13 @@ class _qr_oku extends State<qr_oku>{
   }
   void goster(){
     if(result!=null){
-      Text("scan data");
+      //Navigator.pushNamed(context,"kullaniciyi_gor");
+      
+      Text("${describeEnum(result!.format)} data: ${result!.code}");
+      
     }
     else{
-      Navigator.pushNamed(context, "admin_giris");
+      Text("scan data");
     }
   }
   @override
