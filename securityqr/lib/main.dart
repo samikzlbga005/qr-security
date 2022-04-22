@@ -7,6 +7,8 @@ import 'package:securityqr/admin/admin_giris.dart';
 import 'package:securityqr/admin/kullanicilar.dart';
 import 'package:securityqr/admin/admin_son_hareketler.dart';
 import 'admin/admin_bilgi_guncelle.dart';
+import 'admin/qr_oku.dart';
+
 
 import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
 import 'kullanici/kullanici_giris.dart';
@@ -15,7 +17,7 @@ import 'kullanici/kullanici_bilgi_guncelle.dart';
 import 'kullanici/sifremi_unuttum.dart';
 
 
-void main() {
+void main() async{
   runApp(new MaterialApp(
    
     initialRoute: "/",
@@ -34,6 +36,7 @@ void main() {
       "admin_son_hareketler":(context)=> admin_son_hareketler(),
       "kullanicilar":(context) => kullanicilar(),
       "admin_bilgi_guncelle":(context) => admin_bilgi_guncelle(),
+      "qr_oku":(context) => qr_oku(),
     }));
 }
 

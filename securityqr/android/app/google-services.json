@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "253927032883",
+    "project_id": "qr-security-7ceb8",
+    "storage_bucket": "qr-security-7ceb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253927032883:android:4587ef0cdb1cf7fa8a7b46",
+        "android_client_info": {
+          "package_name": "com.example.securityqr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253927032883-0kf3m5hr83j78nu1aoipiuonk7eadj9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWX_gEgrknQeAjR6bG4sA5IWSOmLZqg9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253927032883-0kf3m5hr83j78nu1aoipiuonk7eadj9e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

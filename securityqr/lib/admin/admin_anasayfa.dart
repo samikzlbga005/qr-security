@@ -47,6 +47,15 @@ class _admin_anasayfa extends State<admin_anasayfa>{
             Container(
               child: FlatButton(
               color: Colors.blue,
+              child: Text("QR Oku",style: TextStyle(fontSize: 18,color: Colors.white),),
+              onPressed: (){
+                Navigator.pushNamed(context, "qr_oku");
+              },
+              ),
+            ),
+            Container(
+              child: FlatButton(
+              color: Colors.blue,
               child: Text("Kullanıcılar",style: TextStyle(fontSize: 18,color: Colors.white),),
               onPressed: (){
                 Navigator.pushNamed(context, "kullanicilar");
