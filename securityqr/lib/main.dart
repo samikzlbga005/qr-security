@@ -19,7 +19,15 @@ import 'kullanici/kullanici_bilgi_guncelle.dart';
 import 'kullanici/sifremi_unuttum.dart';
 
 
+//database
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
   runApp(new MaterialApp(
    
     initialRoute: "/",
