@@ -39,21 +39,33 @@ class _kullanici_giris extends State<kullanici_giris>{
   late String plaka = "";
   late String daire = "";
   int kullanicino = 0;
-  late AsyncSnapshot<QuerySnapshot> snapshot;
+  bool sayac = true;
+  
 
   //fonksiyonlar
-  void kullanici_no(){
-    int random =Random().nextInt(99999);
-    kullanicino = 10000;
-    debugPrint("$kullanici_no");  
-    int index = 0;
-    if(kullanicino == snapshot.data!.docChanges[index].doc['kullanıcıno']){
-      //kullanicino = random;
-      debugPrint("$kullanicino");
+  void kullanici_no() async {
+    //bu fonksiyon 
+    QuerySnapshot querySnapshot = await ref.get();
+    int random = Random().nextInt(99999);
+    kullanicino = random;
+    for(int i = 0;i < querySnapshot.size;i++)
+    {
+      if(kullanicino == querySnapshot.docChanges[i].doc['kullanıcıno']){
+        sayac = false;
+        break;
+      }
+      debugPrint("$i");
     }
-    else{
-      index++;
+  
+    if(sayac){
+      ekle(kullanicino);
     }
+    else{ 
+        kullanicino = 88;
+        sayac = true;
+        ekle(kullanicino);
+    }
+
     /* 
       if(kullanici_no == database)
         kullanici_no = random.next;
@@ -70,9 +82,7 @@ class _kullanici_giris extends State<kullanici_giris>{
      */         
   }
 
-  void ekle(){
-    
-
+  void ekle(int id){
     setState(() {
       ad = adcontroller.text;
     mail = mailcontroller.text;
@@ -95,7 +105,7 @@ class _kullanici_giris extends State<kullanici_giris>{
     dairelist.add(daire);
 
     ref.add({
-      "kullanıcıno": kullanicino,
+      "kullanıcıno": id,
       'adsoyad': ad,
       'mail': mail,
       'telefon': telefon,
@@ -237,7 +247,7 @@ class _kullanici_giris extends State<kullanici_giris>{
                                       onPressed: () {
                                         setState(() {
                                           kullanici_no();
-                                        ekle();
+                                        //ekle();
                                         });
                                       },
                                     ),
