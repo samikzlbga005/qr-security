@@ -13,7 +13,8 @@ class _admin_giris extends State<admin_giris>{
       appBar: AppBar(
         title: Text("Admin Giriş"),
       ),
-      body: Center(
+      body: SingleChildScrollView(
+        child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -54,6 +55,7 @@ class _admin_giris extends State<admin_giris>{
             ),
           ],
         ),
+      ),
       ),
     );
   }
