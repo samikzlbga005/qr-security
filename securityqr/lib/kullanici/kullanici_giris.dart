@@ -43,8 +43,9 @@ class _kullanici_giris extends State<kullanici_giris>{
   
 
   //fonksiyonlar
+
   void kullanici_no() async {
-    //bu fonksiyon 
+    //bu fonksiyon kullanıcı no oluşturmaktadır
     QuerySnapshot querySnapshot = await ref.get();
     int random = Random().nextInt(99999);
     kullanicino = random;
@@ -64,22 +65,7 @@ class _kullanici_giris extends State<kullanici_giris>{
         kullanicino = 88;
         sayac = true;
         ekle(kullanicino);
-    }
-
-    /* 
-      if(kullanici_no == database)
-        kullanici_no = random.next;
-        kullanici_ekle();
-      else
-        kullanici_ekle();
-    */                   
-
-
-    /*
-      void kullanici_ekle(){
-        adsoyad_list.add([])
-      }
-     */         
+    }       
   }
 
   void ekle(int id){
