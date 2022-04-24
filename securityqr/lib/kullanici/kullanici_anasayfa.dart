@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'kullanici_giris.dart';
 
 class kullanici_anasayfa extends StatefulWidget{
+
+  final String Kisim;
+  final String Kmail;
+  final String Ktelefon;
+  final String Karac;
+  final String Kplaka;
+  final String Kdaire;
+  final int Kno;
+
+  kullanici_anasayfa(this.Kisim,this.Kmail,this.Ktelefon,this.Kno,this.Karac,this.Kplaka,this.Kdaire);
   @override
   State<StatefulWidget> createState() =>_kullanici_anasayfa();
 
@@ -9,6 +20,11 @@ class kullanici_anasayfa extends StatefulWidget{
 
 class _kullanici_anasayfa extends State<kullanici_anasayfa>{
   bool a = true;
+
+  void kullaniciGoster(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,13 +51,13 @@ class _kullanici_anasayfa extends State<kullanici_anasayfa>{
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text("Ad Soyad: Sami KIZILBOĞA",style: TextStyle(fontSize: 18),),
-                    Text("E - Mail: samikzlbga005@gmail.com",style: TextStyle(fontSize: 18),),
-                    Text("Telefon: 542 824 6640",style: TextStyle(fontSize: 18),),
-                    Text("Kullanıcı No: 123456",style: TextStyle(fontSize: 18),),
-                    Text("Araç Markası: Skoda Octavia",style: TextStyle(fontSize: 18),),
-                    Text("Daire No: 14/B",style: TextStyle(fontSize: 18),),
-                    Text("Araç Plakası: 42 ASD 42",style: TextStyle(fontSize: 18),),
+                    Text("Ad Soyad: " + widget.Kisim),
+                    Text("E - Mail: " + widget.Kmail),
+                    Text("Telefon: " + widget.Ktelefon),
+                    Text("Kullanıcı No: " + widget.Kno.toString()),
+                    Text("Araç Markası: " + widget.Karac),
+                    Text("Daire No: " + widget.Kdaire),
+                    Text("Araç Plakası: " + widget.Kplaka),
                   ],
                 ),
               ),

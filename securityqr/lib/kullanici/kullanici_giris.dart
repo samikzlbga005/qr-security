@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
 
 class kullanici_giris extends StatefulWidget{
   @override
@@ -19,11 +20,15 @@ class _kullanici_giris extends State<kullanici_giris>{
   //değişkenler
   bool first = false;
   final adcontroller = TextEditingController();
+  final sifrecontroller = TextEditingController();
   final mailcontroller = TextEditingController();
   final telefoncontroller = TextEditingController();
   final araccontroller = TextEditingController();
   final plakacontroller = TextEditingController();
   final dairecontroller = TextEditingController();
+
+  final girismailcontroller = TextEditingController();
+  final girissifrecontroller = TextEditingController();
 
   List<String>adlist = [];
   List<String>maillist = [];
@@ -34,15 +39,64 @@ class _kullanici_giris extends State<kullanici_giris>{
 
   late String ad = "";
   late String mail = "";
+  late String sifre = "";
   late String telefon = "";
   late String arac = "";
   late String plaka = "";
   late String daire = "";
   int kullanicino = 0;
   bool sayac = true;
+  bool giris = true;
   
 
   //fonksiyonlar
+
+  void girisYap()async{
+    //kullanıcı giriş fonksiyonu
+    QuerySnapshot querySnapshot = await ref.get();
+     for(int i = 0;i < querySnapshot.size;i++)
+    {
+      if(girismailcontroller.text == querySnapshot.docChanges[i].doc['mail']){
+          if(girissifrecontroller.text == querySnapshot.docChanges[i].doc['sifre']){
+            //debugPrint("dogruuuu");
+            giris = false;
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+              return kullanici_anasayfa(querySnapshot.docChanges[i].doc['adsoyad'], 
+              querySnapshot.docChanges[i].doc['mail'], 
+              querySnapshot.docChanges[i].doc['telefon'], 
+              querySnapshot.docChanges[i].doc['kullanıcıno'], 
+              querySnapshot.docChanges[i].doc['arac'], 
+              querySnapshot.docChanges[i].doc['daireno'], 
+              querySnapshot.docChanges[i].doc['plaka']);
+            }));
+            break;
+          }
+      }
+      else{
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: Text('Kullanıcı adı veya şifre yanlış!',
+            style: TextStyle(fontSize: 25)),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  girismailcontroller.text ="";
+                  girissifrecontroller.text ="";
+                },
+                child: new Container(
+                    alignment: Alignment.center,
+                    child: Text('TAMAM',style: TextStyle(fontSize: 25),),
+                ) 
+              ),
+            ],
+          ));
+          break;
+      }
+      debugPrint("$i");
+    }
+  }
 
   void kullanici_no() async {
     //bu fonksiyon kullanıcı no oluşturmaktadır
@@ -68,10 +122,12 @@ class _kullanici_giris extends State<kullanici_giris>{
     }       
   }
 
+  //kullanıcı ekleme
   void ekle(int id){
     setState(() {
       ad = adcontroller.text;
     mail = mailcontroller.text;
+    sifre = sifrecontroller.text;
     telefon = telefoncontroller.text;
     arac = araccontroller.text;
     plaka = plakacontroller.text;
@@ -94,6 +150,7 @@ class _kullanici_giris extends State<kullanici_giris>{
       "kullanıcıno": id,
       'adsoyad': ad,
       'mail': mail,
+      'sifre':sifre,
       'telefon': telefon,
       'arac': arac,
       'plaka': plaka,
@@ -107,9 +164,6 @@ class _kullanici_giris extends State<kullanici_giris>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('İş Listesi'),
-      ),
       body: StreamBuilder(
         stream: _userStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -137,6 +191,7 @@ class _kullanici_giris extends State<kullanici_giris>{
                         padding: EdgeInsets.all(15.0),
                         alignment: Alignment.center,
                         child: TextField(
+                        controller: girismailcontroller,
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: 'Mail Adresi',
@@ -147,6 +202,7 @@ class _kullanici_giris extends State<kullanici_giris>{
                         padding: EdgeInsets.all(15.0),
                         alignment: Alignment.center,
                         child: TextField(
+                        controller: girissifrecontroller,
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: 'Şifre',
@@ -159,7 +215,8 @@ class _kullanici_giris extends State<kullanici_giris>{
                       height: 40,
                       child: Text("Giriş Yap"),
                       onPressed: (){
-                        Navigator.pushNamed(context, "kullanici_anasayfa");
+                        girisYap();
+                        //Navigator.pushNamed(context, "kullanici_anasayfa");
                       }
                     ),
                     TextButton(
@@ -179,7 +236,7 @@ class _kullanici_giris extends State<kullanici_giris>{
                               child: AlertDialog(
                                 title: Text('Kayıt Ol'),
                                 content: Container(
-                                  height: 300,
+                                  height: 340,
                                   child: Column(
                                   children: <Widget>[
                                     TextField(
@@ -192,6 +249,12 @@ class _kullanici_giris extends State<kullanici_giris>{
                                       controller: mailcontroller,
                                       decoration: InputDecoration(
                                       hintText: 'Mail Adresi',
+                                      ),
+                                    ),
+                                    TextField(
+                                      controller: sifrecontroller,
+                                      decoration: InputDecoration(
+                                      hintText: 'Şifre',
                                       ),
                                     ),
                                     TextField(

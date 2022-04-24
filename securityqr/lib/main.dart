@@ -35,7 +35,7 @@ void main() async{
       "/": (context) => acilis_ekrani(),
       //kullanıcı sayfalar
       "kullanici_giris": (context) => kullanici_giris(),
-      "kullanici_anasayfa": (context) => kullanici_anasayfa(), 
+      //"kullanici_anasayfa": (context) => kullanici_anasayfa(), 
       "kullanici_son_hareketler": (context) => kullanici_son_hareketler(), 
       "kullanici_bilgi_guncelle": (context) => kullanici_bilgi_guncelle(),
       "sifremi_unuttum": (context) => sifremi_unuttum(),
