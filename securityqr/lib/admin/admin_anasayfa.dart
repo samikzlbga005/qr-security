@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'admin_giris.dart';
 
 class admin_anasayfa extends StatefulWidget{
+
+  final int adminNo;
+  final String adminad;
+  final String adminmail;
+  final String admintelefon;
+
+  admin_anasayfa(this.adminNo,this.adminad,this.adminmail,this.admintelefon);
   @override
   State<StatefulWidget> createState() =>_admin_anasayfa();
 
@@ -26,10 +34,10 @@ class _admin_anasayfa extends State<admin_anasayfa>{
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text("Ad Soyad: Sami KIZILBOĞA",style: TextStyle(fontSize: 18),),
-                    Text("E - Mail: samikzlbga005@gmail.com",style: TextStyle(fontSize: 18),),
-                    Text("Telefon: 542 824 6640",style: TextStyle(fontSize: 18),),
-                    Text("Admin No: 123456",style: TextStyle(fontSize: 18),),
+                    Text("Ad Soyad: " +widget.adminad),
+                    Text("E - Mail: " + widget.adminmail),
+                    Text("Telefon: " + widget.admintelefon),
+                    Text("Admin No: " +  widget.adminNo.toString()),
                   ],
                 ),
               ),

@@ -65,7 +65,7 @@ class _qr_oku extends State<qr_oku>{
   }
   void goster(){
     if(result!=null){
-      //Navigator.pushNamed(context,"kullaniciyi_gor");
+      Navigator.pushNamed(context,"kullaniciyi_gor");
       
       Text("${describeEnum(result!.format)} data: ${result!.code}");
       

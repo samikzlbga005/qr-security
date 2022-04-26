@@ -42,7 +42,7 @@ void main() async{
       "qr_olustur": (context)=> qr_olustur(),
       //admin kısmı
 
-      "admin_anasayfa": (context) => admin_anasayfa(),
+      //"admin_anasayfa": (context) => admin_anasayfa(),
       "admin_giris": (context) => admin_giris(),
       "admin_son_hareketler":(context)=> admin_son_hareketler(),
       "kullanicilar":(context) => kullanicilar(),
