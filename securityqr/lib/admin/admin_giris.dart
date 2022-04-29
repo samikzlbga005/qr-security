@@ -43,19 +43,17 @@ class _admin_giris extends State<admin_giris>{
     QuerySnapshot querySnapshot = await refadmin.get();
      for(int i = 0;i < querySnapshot.size;i++)
     {
-      if(admingirismailcontroller.text == querySnapshot.docChanges[i].doc['adminmail']){
-          if(admingirissifrecontroller.text == querySnapshot.docChanges[i].doc['adminsifre']){
-            //debugPrint("dogruuuu");
-            admingiris = false;
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-              return admin_anasayfa(querySnapshot.docChanges[i].doc['adminNo'], 
-              querySnapshot.docChanges[i].doc['adminad'], 
-              querySnapshot.docChanges[i].doc['adminmail'], 
-              querySnapshot.docChanges[i].doc['admintelefon'], 
-              );
-            }));
-            break;
-          }
+      if((admingirismailcontroller.text == querySnapshot.docChanges[i].doc['adminmail']) & (admingirissifrecontroller.text == querySnapshot.docChanges[i].doc['adminsifre'])){
+         //debugPrint("dogruuuu");
+        admingiris = false;
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+          return admin_anasayfa(querySnapshot.docChanges[i].doc['adminNo'], 
+          querySnapshot.docChanges[i].doc['adminad'], 
+          querySnapshot.docChanges[i].doc['adminmail'], 
+          querySnapshot.docChanges[i].doc['admintelefon'], 
+          );
+        }));
+        break;
       }
       else{
         showDialog<String>(
@@ -79,7 +77,6 @@ class _admin_giris extends State<admin_giris>{
           ));
           break;
       }
-      debugPrint("$i");
     }
   }
 
@@ -100,7 +97,7 @@ class _admin_giris extends State<admin_giris>{
       adminekle(adminNo);
     }
     else{ 
-        adminNo = 88;
+        adminNo = random;
         adminsayac = true;
         adminekle(adminNo);
     }       
@@ -166,21 +163,28 @@ class _admin_giris extends State<admin_giris>{
                 ),
               ),
             ),
-            FlatButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              height: 40,
-              child: Text("Giriş Yap"),
-              onPressed: (){
-                //Navigator.pushNamed(context, "admin_anasayfa");
-                AdminGirisYap();
-              }
+            Container(
+              padding: EdgeInsets.only(top:25),
+              child: FlatButton(
+                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                color: Colors.blue,
+                textColor: Colors.white,
+                height: 40,
+                child: Text("Giriş Yap"),
+                onPressed: (){
+                  //Navigator.pushNamed(context, "admin_anasayfa");
+                  AdminGirisYap();
+                }
+              ),
             ),
-            TextButton(
-              child: Text("Şifremi Unuttum"),
-              onPressed: (){
-                Navigator.pushNamed(context, "sifremi_unuttum");
-              },
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: TextButton(
+                child: Text("Şifremi Unuttum"),
+                onPressed: (){
+                  Navigator.pushNamed(context, "sifremi_unuttum");
+                },
+              ),
             ),
             //kayıt olma alerti
                     TextButton(

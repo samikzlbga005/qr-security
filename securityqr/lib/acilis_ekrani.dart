@@ -21,6 +21,7 @@ class _acilis_ekran extends State<acilis_ekrani>{
             Container(
               padding: EdgeInsets.all(10.0),
               child: FlatButton(
+                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                 color: Colors.blue,
                 textColor: Colors.white,
                 child: Text("Kullanıcı Giriş",style: TextStyle(fontSize: 20.0),),
@@ -32,6 +33,7 @@ class _acilis_ekran extends State<acilis_ekrani>{
             Container(
               padding: EdgeInsets.all(10.0),
               child: FlatButton(
+                padding: EdgeInsets.fromLTRB(28, 15, 28, 15),
                 color: Colors.blue,
                 textColor: Colors.white,
                 child: Text("Admin Giriş",style: TextStyle(fontSize: 20.0),),

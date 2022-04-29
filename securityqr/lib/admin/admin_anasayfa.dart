@@ -25,8 +25,8 @@ class _admin_anasayfa extends State<admin_anasayfa>{
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(5,0,5,0),
-              height: 220,
+              padding: EdgeInsets.fromLTRB(5,5,5,0),
+              height: 200,
               width: double.maxFinite,
               child: Card(
                 color: Colors.amber,
@@ -45,6 +45,7 @@ class _admin_anasayfa extends State<admin_anasayfa>{
             Container(
               padding: EdgeInsets.only(top:15),
               child: FlatButton(
+                padding: EdgeInsets.fromLTRB(20, 15, 10, 15),
               color: Colors.blue,
               child: Text("Son Hareketler",style: TextStyle(fontSize: 18,color: Colors.white),),
               onPressed: (){
@@ -53,16 +54,9 @@ class _admin_anasayfa extends State<admin_anasayfa>{
               ),
             ),
             Container(
+              padding: EdgeInsets.only(top:15),
               child: FlatButton(
-              color: Colors.blue,
-              child: Text("QR Oku",style: TextStyle(fontSize: 18,color: Colors.white),),
-              onPressed: (){
-                Navigator.pushNamed(context, "qr_oku");
-              },
-              ),
-            ),
-            Container(
-              child: FlatButton(
+              padding: EdgeInsets.fromLTRB(30, 13, 30, 13),
               color: Colors.blue,
               child: Text("Kullanıcılar",style: TextStyle(fontSize: 18,color: Colors.white),),
               onPressed: (){
@@ -71,7 +65,9 @@ class _admin_anasayfa extends State<admin_anasayfa>{
               ),
             ),
              Container(
+              padding: EdgeInsets.only(top:15),
               child: FlatButton(
+              padding: EdgeInsets.fromLTRB(8, 15, 8 , 15),
               color: Colors.blue,
               child: Text("Bilgileri Güncelle",style: TextStyle(fontSize: 18,color: Colors.white),),
               onPressed: (){
@@ -80,7 +76,9 @@ class _admin_anasayfa extends State<admin_anasayfa>{
               ),
             ),
             Container(
+              padding: EdgeInsets.only(top:15),
               child: FlatButton(
+              padding: EdgeInsets.fromLTRB(38, 15, 38 , 15),
               color: Colors.blue,
               child: Text("Çıkış Yap",style: TextStyle(fontSize: 18,color: Colors.white),),
               onPressed: (){
@@ -93,7 +91,7 @@ class _admin_anasayfa extends State<admin_anasayfa>{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
+          Navigator.pushNamed(context, "qr_oku");
         },
         tooltip: 'Increment',
         child: const Icon(Icons.camera_alt,

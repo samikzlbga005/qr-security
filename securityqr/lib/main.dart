@@ -10,6 +10,7 @@ import 'package:securityqr/kullanici/qr_olustur.dart';
 import 'admin/admin_bilgi_guncelle.dart';
 import 'admin/qr_oku.dart';
 import 'admin/kullaniciyi_gor.dart';
+import 'admin/kullanici_bul.dart';
 
 
 import 'package:securityqr/kullanici/kullanici_anasayfa.dart';

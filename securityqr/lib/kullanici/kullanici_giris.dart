@@ -116,7 +116,7 @@ class _kullanici_giris extends State<kullanici_giris>{
       ekle(kullanicino);
     }
     else{ 
-        kullanicino = 88;
+        kullanicino = random;
         sayac = true;
         ekle(kullanicino);
     }       
@@ -209,21 +209,28 @@ class _kullanici_giris extends State<kullanici_giris>{
                         ),
                       ),
                     ),
-                    FlatButton(
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                      height: 40,
-                      child: Text("Giriş Yap"),
-                      onPressed: (){
-                        girisYap();
-                        //Navigator.pushNamed(context, "kullanici_anasayfa");
-                      }
+                    Container(
+                      padding: EdgeInsets.only(top:25),
+                      child: FlatButton(
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                        height: 40,
+                        child: Text("Giriş Yap"),
+                        onPressed: (){
+                          girisYap();
+                          //Navigator.pushNamed(context, "kullanici_anasayfa");
+                        }
+                      ),
                     ),
-                    TextButton(
-                      child: Text("Şifremi Unuttum"),
-                      onPressed: (){
-                        Navigator.pushNamed(context, "sifremi_unuttum");
-                      },
+                    Container(
+                      padding: EdgeInsets.only(top: 10),
+                      child: TextButton(
+                        child: Text("Şifremi Unuttum"),
+                        onPressed: (){
+                          Navigator.pushNamed(context, "sifremi_unuttum");
+                        },
+                      ),
                     ),
                     //kayıt olma alerti
                     TextButton(
