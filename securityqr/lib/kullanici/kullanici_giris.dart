@@ -19,33 +19,12 @@ class _kullanici_giris extends State<kullanici_giris>{
 
   //değişkenler
   bool first = false;
-  final adcontroller = TextEditingController();
-  final sifrecontroller = TextEditingController();
-  final mailcontroller = TextEditingController();
-  final telefoncontroller = TextEditingController();
-  final araccontroller = TextEditingController();
-  final plakacontroller = TextEditingController();
-  final dairecontroller = TextEditingController();
+  
 
   final girismailcontroller = TextEditingController();
   final girissifrecontroller = TextEditingController();
 
-  List<String>adlist = [];
-  List<String>maillist = [];
-  List<String>telefonlist = [];
-  List<String>araclist = [];
-  List<String>plakalist = [];
-  List<String>dairelist = [];
-
-  late String ad = "";
-  late String mail = "";
-  late String sifre = "";
-  late String telefon = "";
-  late String arac = "";
-  late String plaka = "";
-  late String daire = "";
-  int kullanicino = 0;
-  bool sayac = true;
+ 
   bool giris = true;
   
 
@@ -98,68 +77,7 @@ class _kullanici_giris extends State<kullanici_giris>{
     }
   }
 
-  void kullanici_no() async {
-    //bu fonksiyon kullanıcı no oluşturmaktadır
-    QuerySnapshot querySnapshot = await ref.get();
-    int random = Random().nextInt(99999);
-    kullanicino = random;
-    for(int i = 0;i < querySnapshot.size;i++)
-    {
-      if(kullanicino == querySnapshot.docChanges[i].doc['kullanıcıno']){
-        sayac = false;
-        break;
-      }
-      debugPrint("$i");
-    }
   
-    if(sayac){
-      ekle(kullanicino);
-    }
-    else{ 
-        kullanicino = random;
-        sayac = true;
-        ekle(kullanicino);
-    }       
-  }
-
-  //kullanıcı ekleme
-  void ekle(int id){
-    setState(() {
-      ad = adcontroller.text;
-    mail = mailcontroller.text;
-    sifre = sifrecontroller.text;
-    telefon = telefoncontroller.text;
-    arac = araccontroller.text;
-    plaka = plakacontroller.text;
-    daire = dairecontroller.text;
-    adcontroller.clear();
-    mailcontroller.clear();
-    telefoncontroller.clear();
-    araccontroller.clear();
-    plakacontroller.clear();
-    dairecontroller.clear();
-
-    adlist.add(ad);
-    maillist.add(mail);
-    telefonlist.add(telefon);
-    araclist.add(arac);
-    plakalist.add(plaka);
-    dairelist.add(daire);
-
-    ref.add({
-      "kullanıcıno": id,
-      'adsoyad': ad,
-      'mail': mail,
-      'sifre':sifre,
-      'telefon': telefon,
-      'arac': arac,
-      'plaka': plaka,
-      'daireno': daire,
-      });
-    });
-    Navigator.pop(context);
-    
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -231,98 +149,6 @@ class _kullanici_giris extends State<kullanici_giris>{
                           Navigator.pushNamed(context, "sifremi_unuttum");
                         },
                       ),
-                    ),
-                    //kayıt olma alerti
-                    TextButton(
-                      child: Text("Kayıt Ol"),
-                      onPressed: (){
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return SingleChildScrollView(
-                              child: AlertDialog(
-                                title: Text('Kayıt Ol'),
-                                content: Container(
-                                  height: 340,
-                                  child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      controller: adcontroller,
-                                      decoration: InputDecoration(
-                                      hintText: 'Ad Soyad',
-                                      ),
-                                    ),
-                                    TextField(
-                                      controller: mailcontroller,
-                                      decoration: InputDecoration(
-                                      hintText: 'Mail Adresi',
-                                      ),
-                                    ),
-                                    TextField(
-                                      controller: sifrecontroller,
-                                      decoration: InputDecoration(
-                                      hintText: 'Şifre',
-                                      ),
-                                    ),
-                                    TextField(
-                                      controller: telefoncontroller,
-                                      decoration: InputDecoration(
-                                      hintText: 'Cep Telefonu',
-                                      ),
-                                    ),
-                                    TextField(
-                                      controller: araccontroller,
-                                      decoration: InputDecoration(
-                                      hintText: 'Araç Markası',
-                                      ),
-                                    ),
-                                    TextField(
-                                      controller: plakacontroller,
-                                      decoration: InputDecoration(
-                                      hintText: 'Araç Plakası',
-                                      ),
-                                    ),
-                                    TextField(
-                                      controller: dairecontroller,
-                                      decoration: InputDecoration(
-                                      hintText: 'Daire No',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                                
-                              actions: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    FlatButton(
-                                      color: Colors.blue,
-                                      textColor: Colors.white,
-                                      child: Text('Kayıt Ol'),
-                                      onPressed: () {
-                                        setState(() {
-                                          kullanici_no();
-                                        //ekle();
-                                        });
-                                      },
-                                    ),
-                                    FlatButton(
-                                      color: Colors.blue,
-                                      textColor: Colors.white,
-                                      child: Text('Kapat'),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                      
-                              ],
-                            ),
-                          );
-                        });
-                      },
                     ),
                     Container(
                       child: Row(

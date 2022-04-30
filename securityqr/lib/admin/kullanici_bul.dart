@@ -15,8 +15,6 @@ kullanici_bul(this.bul_no,this.bul_isim,this.bul_mail);
   @override
   State<StatefulWidget> createState() =>_kullanici_bul();
 
-  
-
 }
 
 class _kullanici_bul extends State<kullanici_bul>{
@@ -30,7 +28,7 @@ class _kullanici_bul extends State<kullanici_bul>{
         }));
   }*/
   CollectionReference ref = FirebaseFirestore.instance.collection('qr-security');
-
+  
   void kullaniciya_git(int kullanici_no)async{
     QuerySnapshot querySnapshot = await ref.get();
     for(int i =0; i<querySnapshot.size;i++){
@@ -57,30 +55,35 @@ class _kullanici_bul extends State<kullanici_bul>{
         title: Text("Kullanıcı Anasayfa"),
       ),
       body: Center(
-        child: GestureDetector(
-          child: Container(
-              padding: EdgeInsets.fromLTRB(5,0,5,0),
-              height: 100,
-              width: double.maxFinite,
-              child: Card(
-                color: Colors.amber,
-                elevation: 5,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Text("Ad Soyad: " + widget.bul_isim),
-                    Text("E - Mail: " + widget.bul_mail),
-                    Text("Kullanıcı No: " + widget.bul_no.toString()),
-                  ],
+            child: GestureDetector(
+              child: Container(
+                  padding: EdgeInsets.fromLTRB(5,0,5,0),
+                  height: 100,
+                  width: double.maxFinite,
+                  child: Card(
+                    color: Colors.amber,
+                    elevation: 5,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Text("Ad Soyad: " + widget.bul_isim),
+                        Text("E - Mail: " + widget.bul_mail),
+                        Text("Kullanıcı No: " + widget.bul_no.toString()),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+                onTap: (){
+                  kullaniciya_git(widget.bul_no);
+                },
             ),
-            onTap: (){
-              kullaniciya_git(widget.bul_no);
-            },
-        ),
-      ),
+          ),
     );
   }
 
 }
+
+
+
+
+

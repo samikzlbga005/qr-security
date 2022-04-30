@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
 import 'kullanici_bul.dart';
+
 
 class kullanicilar extends StatefulWidget{
   @override
@@ -16,7 +18,7 @@ class _kullanicilar extends State<kullanicilar>{
   final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance.collection('qr-security').snapshots();
   CollectionReference ref = FirebaseFirestore.instance.collection('qr-security');
   final kullanicicontroller = TextEditingController();
-  
+  //kullanıcı bulma fonksiyonu
   void bul()async{
     late bool isFind = true;
     QuerySnapshot querySnapshot = await ref.get();
@@ -32,7 +34,6 @@ class _kullanicilar extends State<kullanicilar>{
         }));
         isFind = false;
         kullanicicontroller.clear();
-        break;
       }
     }
       if(isFind){
@@ -57,6 +58,8 @@ class _kullanicilar extends State<kullanicilar>{
           isFind = true;
       }
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +137,8 @@ class _kullanicilar extends State<kullanicilar>{
               ),
             );
           }
-          return Container(
+          return GestureDetector(
+            child: Container(
                 child: ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context,index){
@@ -156,12 +160,30 @@ class _kullanicilar extends State<kullanicilar>{
                 ));      
               } 
             ),
-          ); 
+          ), 
+          onTap: (){
+            for(int i =0; i<snapshot.data!.size;i++){
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                return kullanici_anasayfa(snapshot.data!.docChanges[i].doc['adsoyad'], 
+                snapshot.data!.docChanges[i].doc['mail'], 
+                snapshot.data!.docChanges[i].doc['telefon'],
+                snapshot.data!.docChanges[i].doc['kullanıcıno'],
+                snapshot.data!.docChanges[i].doc['arac'],
+                snapshot.data!.docChanges[i].doc['plaka'],
+                snapshot.data!.docChanges[i].doc['daireno'], 
+                );
+              }));
+            }
+            
+          },
+          );
         }
-      )
-      
-      
-      /*
+      ),
+    );
+  }
+
+}
+ /*
       body: Center(
         child: Column(
           children: <Widget>[
@@ -185,7 +207,3 @@ class _kullanicilar extends State<kullanicilar>{
           ],
         ),
       ),*/
-    );
-  }
-
-}
