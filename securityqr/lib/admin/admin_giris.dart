@@ -38,6 +38,7 @@ class _admin_giris extends State<admin_giris>{
   int adminNo = 0;
   bool adminsayac = true;
   bool admingiris = true;
+  int sayac = 0;
 
   void AdminGirisYap()async{
     QuerySnapshot querySnapshot = await refadmin.get();
@@ -53,9 +54,11 @@ class _admin_giris extends State<admin_giris>{
           querySnapshot.docChanges[i].doc['admintelefon'], 
           );
         }));
+        sayac++;
         break;
       }
-      else{
+    }
+    if(sayac ==0){
         showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -75,9 +78,7 @@ class _admin_giris extends State<admin_giris>{
               ),
             ],
           ));
-          break;
       }
-    }
   }
 
   void adminNoEkle() async{

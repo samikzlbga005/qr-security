@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
 import 'admin_giris.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -57,6 +58,7 @@ class _admin_anasayfa extends State<admin_anasayfa>{
     QuerySnapshot querySnapshot = await ref.get();
     int random = Random().nextInt(99999);
     kullanicino = random;
+
     for(int i = 0;i < querySnapshot.size;i++)
     {
       if(kullanicino == querySnapshot.docChanges[i].doc['kullanıcıno']){
@@ -93,6 +95,7 @@ class _admin_anasayfa extends State<admin_anasayfa>{
     araccontroller.clear();
     plakacontroller.clear();
     dairecontroller.clear();
+    sifrecontroller.clear();
 
     adlist.add(ad);
     maillist.add(mail);
@@ -112,6 +115,7 @@ class _admin_anasayfa extends State<admin_anasayfa>{
       'daireno': daire,
       });
     });
+
     
   }
 

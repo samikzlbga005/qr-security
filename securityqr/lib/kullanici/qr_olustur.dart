@@ -44,7 +44,6 @@ class _qr_olustur extends State<qr_olustur>{
                       qrData = controller.text;
                     });
                   }
-
                     },
                   ),
                   labelText: 'Kullanıcı no',

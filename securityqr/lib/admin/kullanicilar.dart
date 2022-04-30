@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
+import 'kullanici_anasayfa_erisme.dart';
 import 'kullanici_bul.dart';
 
 
@@ -137,8 +138,7 @@ class _kullanicilar extends State<kullanicilar>{
               ),
             );
           }
-          return GestureDetector(
-            child: Container(
+          return Container(
                 child: ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context,index){
@@ -146,7 +146,8 @@ class _kullanicilar extends State<kullanicilar>{
                     padding: EdgeInsets.fromLTRB(10,10,10,0),
                     height: 120,
                     width: double.maxFinite,
-                    child: Card(
+                    child: GestureDetector(
+                      child: Card(
                       color: Colors.amber,
                       elevation: 5,
                       child: Column(
@@ -157,25 +158,24 @@ class _kullanicilar extends State<kullanicilar>{
                           Text("Kullanıcı No: " +  snapshot.data!.docChanges[index].doc['kullanıcıno'].toString(),style: TextStyle(fontSize: 22),),
                     ],
                   ),  
-                ));      
+                ),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                    return kullanici_anasayfa_erisme(
+                      snapshot.data!.docChanges[index].doc['adsoyad'], 
+                      snapshot.data!.docChanges[index].doc['mail'], 
+                      snapshot.data!.docChanges[index].doc['telefon'], 
+                      snapshot.data!.docChanges[index].doc['kullanıcıno'],
+                      snapshot.data!.docChanges[index].doc['arac'],
+                      snapshot.data!.docChanges[index].doc['plaka'],
+                      snapshot.data!.docChanges[index].doc['daireno'],
+                    );
+                  }));
+                },
+              ),
+            );      
               } 
             ),
-          ), 
-          onTap: (){
-            for(int i =0; i<snapshot.data!.size;i++){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                return kullanici_anasayfa(snapshot.data!.docChanges[i].doc['adsoyad'], 
-                snapshot.data!.docChanges[i].doc['mail'], 
-                snapshot.data!.docChanges[i].doc['telefon'],
-                snapshot.data!.docChanges[i].doc['kullanıcıno'],
-                snapshot.data!.docChanges[i].doc['arac'],
-                snapshot.data!.docChanges[i].doc['plaka'],
-                snapshot.data!.docChanges[i].doc['daireno'], 
-                );
-              }));
-            }
-            
-          },
           );
         }
       ),

@@ -26,19 +26,19 @@ class _kullanici_giris extends State<kullanici_giris>{
 
  
   bool giris = true;
-  
+  int sayac =0;
 
   //fonksiyonlar
 
   void girisYap()async{
     //kullanıcı giriş fonksiyonu
     QuerySnapshot querySnapshot = await ref.get();
-     for(int i = 0;i < querySnapshot.size;i++)
-    {
-      if(girismailcontroller.text == querySnapshot.docChanges[i].doc['mail']){
-          if(girissifrecontroller.text == querySnapshot.docChanges[i].doc['sifre']){
-            //debugPrint("dogruuuu");
-            giris = false;
+     for(int i = 0 ; i < querySnapshot.size ; i++)
+     {
+      if((girismailcontroller.text == querySnapshot.docChanges[i].doc['mail']) & (girissifrecontroller.text == querySnapshot.docChanges[i].doc['sifre'])){
+          
+            debugPrint("dogruuuu");
+            //giris = false;
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
               return kullanici_anasayfa(querySnapshot.docChanges[i].doc['adsoyad'], 
               querySnapshot.docChanges[i].doc['mail'], 
@@ -48,32 +48,31 @@ class _kullanici_giris extends State<kullanici_giris>{
               querySnapshot.docChanges[i].doc['daireno'], 
               querySnapshot.docChanges[i].doc['plaka']);
             }));
-            break;
-          }
+            sayac ++;
       }
-      else{
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: Text('Kullanıcı adı veya şifre yanlış!',
-            style: TextStyle(fontSize: 25)),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  girismailcontroller.text ="";
-                  girissifrecontroller.text ="";
-                },
-                child: new Container(
-                    alignment: Alignment.center,
-                    child: Text('TAMAM',style: TextStyle(fontSize: 25),),
-                ) 
-              ),
-            ],
-          ));
-          break;
-      }
-      debugPrint("$i");
+    }
+
+    if(sayac == 0){
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Kullanıcı adı veya şifre yanlış!',
+          style: TextStyle(fontSize: 25)),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                girismailcontroller.text ="";
+                girissifrecontroller.text ="";
+              },
+              child: new Container(
+                  alignment: Alignment.center,
+                  child: Text('TAMAM',style: TextStyle(fontSize: 25),),
+              ) 
+            ),
+          ],
+        ));
+        sayac = 0;
     }
   }
 
