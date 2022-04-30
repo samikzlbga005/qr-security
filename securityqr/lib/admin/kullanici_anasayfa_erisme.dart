@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../kullanici/kullanici_giris.dart';
-
+import 'package:qr_flutter/qr_flutter.dart';
 class kullanici_anasayfa_erisme extends StatefulWidget{
 
   final String Kisim;
@@ -34,13 +34,11 @@ class _kullanici_anasayfa_erisme extends State<kullanici_anasayfa_erisme>{
       body: Center(
         child: Column(
           children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(30,20,30,0),
-              height: 200,
-              width: 200,
-              child: Image.asset('resim/profil_resmi.jpg'),
-            ),
+            QrImage(
+                data: widget.Kno.toString(),
+                size: 165,
+                backgroundColor: Colors.white,
+              ),  
             Container(
               padding: EdgeInsets.fromLTRB(5,0,5,0),
               height: 200,
