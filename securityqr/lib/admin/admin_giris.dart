@@ -46,7 +46,7 @@ class _admin_giris extends State<admin_giris>{
       if((admingirismailcontroller.text == querySnapshot.docChanges[i].doc['adminmail']) & (admingirissifrecontroller.text == querySnapshot.docChanges[i].doc['adminsifre'])){
          //debugPrint("dogruuuu");
         admingiris = false;
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
           return admin_anasayfa(querySnapshot.docChanges[i].doc['adminNo'], 
           querySnapshot.docChanges[i].doc['adminad'], 
           querySnapshot.docChanges[i].doc['adminmail'], 

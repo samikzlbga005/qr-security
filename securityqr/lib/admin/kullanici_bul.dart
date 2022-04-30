@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:securityqr/kullanici/kullanici_anasayfa.dart';
 import 'kullanicilar.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'kullanici_anasayfa_erisme.dart';
 
 class kullanici_bul extends StatefulWidget{
 final String bul_isim;
@@ -24,6 +29,26 @@ class _kullanici_bul extends State<kullanici_bul>{
           );
         }));
   }*/
+  CollectionReference ref = FirebaseFirestore.instance.collection('qr-security');
+
+  void kullaniciya_git(int kullanici_no)async{
+    QuerySnapshot querySnapshot = await ref.get();
+    for(int i =0; i<querySnapshot.size;i++){
+      if(kullanici_no == querySnapshot.docChanges[i].doc['kullanıcıno']){
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+          return kullanici_anasayfa_erisme(
+            querySnapshot.docChanges[i].doc['adsoyad'], 
+            querySnapshot.docChanges[i].doc['mail'], 
+            querySnapshot.docChanges[i].doc['telefon'], 
+            querySnapshot.docChanges[i].doc['kullanıcıno'],
+            querySnapshot.docChanges[i].doc['arac'],
+            querySnapshot.docChanges[i].doc['plaka'],
+            querySnapshot.docChanges[i].doc['daireno'],
+          );
+        }));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +76,7 @@ class _kullanici_bul extends State<kullanici_bul>{
               ),
             ),
             onTap: (){
-              //Navigator.pushNamed(context, routeName)
+              kullaniciya_git(widget.bul_no);
             },
         ),
       ),

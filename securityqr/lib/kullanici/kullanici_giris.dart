@@ -60,7 +60,7 @@ class _kullanici_giris extends State<kullanici_giris>{
           if(girissifrecontroller.text == querySnapshot.docChanges[i].doc['sifre']){
             //debugPrint("dogruuuu");
             giris = false;
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
               return kullanici_anasayfa(querySnapshot.docChanges[i].doc['adsoyad'], 
               querySnapshot.docChanges[i].doc['mail'], 
               querySnapshot.docChanges[i].doc['telefon'], 

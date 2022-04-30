@@ -10,16 +10,19 @@ class kullanicilar extends StatefulWidget{
 
 }
 
+//admin kullanıcı bulması sağlandı --> bul() fonsiyonu
+
 class _kullanicilar extends State<kullanicilar>{
   final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance.collection('qr-security').snapshots();
   CollectionReference ref = FirebaseFirestore.instance.collection('qr-security');
   final kullanicicontroller = TextEditingController();
-
+  
   void bul()async{
+    late bool isFind = true;
     QuerySnapshot querySnapshot = await ref.get();
 
     for(int i = 0; i < querySnapshot.size;i++){
-      if(kullanicicontroller.text == querySnapshot.docChanges[i].doc['adsoyad']){
+      if((kullanicicontroller.text == querySnapshot.docChanges[i].doc['kullanıcıno'].toString()) | (kullanicicontroller.text == querySnapshot.docChanges[i].doc['adsoyad'])){
         //Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
           return kullanici_bul(querySnapshot.docChanges[i].doc['kullanıcıno'], 
@@ -27,9 +30,12 @@ class _kullanicilar extends State<kullanicilar>{
           querySnapshot.docChanges[i].doc['mail'], 
           );
         }));
+        isFind = false;
         kullanicicontroller.clear();
+        break;
       }
-      else{
+    }
+      if(isFind){
         showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -38,7 +44,6 @@ class _kullanicilar extends State<kullanicilar>{
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  
                   kullanicicontroller.clear();
                   Navigator.pop(context);
                 },
@@ -49,8 +54,8 @@ class _kullanicilar extends State<kullanicilar>{
               ),
             ],
           ));
+          isFind = true;
       }
-    }
   }
 
   @override
@@ -76,7 +81,7 @@ class _kullanicilar extends State<kullanicilar>{
                           TextField(
                             controller: kullanicicontroller,
                             decoration: InputDecoration(
-                            hintText: 'Kullanıcı Ad Soyad',
+                            hintText: 'Kullanıcı No veya Ad Soyad',
                             ),
                           ),
                         ],
@@ -92,7 +97,6 @@ class _kullanicilar extends State<kullanicilar>{
                             textColor: Colors.white,
                             child: Text('Bul'),
                             onPressed: () {
-                            Navigator.pop(context);
                               bul();
                             },
                           ),
