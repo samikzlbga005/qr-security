@@ -19,6 +19,10 @@ class _acilis_ekran extends State<acilis_ekrani>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
+              padding: EdgeInsets.all(15),
+              child: Text("Qr Security Uygulması Anasayfa",style: TextStyle(fontSize: 20),),
+            ),
+            Container(
               padding: EdgeInsets.all(10.0),
               child: FlatButton(
                 padding: EdgeInsets.fromLTRB(20, 15, 20, 15),

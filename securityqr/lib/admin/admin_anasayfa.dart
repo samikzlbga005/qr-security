@@ -115,8 +115,6 @@ class _admin_anasayfa extends State<admin_anasayfa>{
       'daireno': daire,
       });
     });
-
-    
   }
 
 
@@ -149,25 +147,25 @@ class _admin_anasayfa extends State<admin_anasayfa>{
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top:15),
-                child: FlatButton(
+                  padding: EdgeInsets.only(top:15),
+                  child: FlatButton(
                   padding: EdgeInsets.fromLTRB(20, 15, 10, 15),
-                color: Colors.blue,
-                child: Text("Son Hareketler",style: TextStyle(fontSize: 18,color: Colors.white),),
-                onPressed: (){
-                  Navigator.pushNamed(context, "admin_son_hareketler");
-                },
+                  color: Colors.blue,
+                  child: Text("Son Hareketler",style: TextStyle(fontSize: 18,color: Colors.white),),
+                  onPressed: (){
+                    Navigator.pushNamed(context, "admin_son_hareketler");
+                  },
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top:15),
-                child: FlatButton(
-                padding: EdgeInsets.fromLTRB(30, 13, 30, 13),
-                color: Colors.blue,
-                child: Text("Kullanıcılar",style: TextStyle(fontSize: 18,color: Colors.white),),
-                onPressed: (){
-                  Navigator.pushNamed(context, "kullanicilar");
-                },
+                  padding: EdgeInsets.only(top:15),
+                  child: FlatButton(
+                  padding: EdgeInsets.fromLTRB(30, 13, 30, 13),
+                  color: Colors.blue,
+                  child: Text("Kullanıcılar",style: TextStyle(fontSize: 18,color: Colors.white),),
+                  onPressed: (){
+                    Navigator.pushNamed(context, "kullanicilar");
+                  },
                 ),
               ),
               Container(
@@ -258,7 +256,6 @@ class _admin_anasayfa extends State<admin_anasayfa>{
                               ),
                             ],
                           ),
-                
                         ],
                       ),
                     );
