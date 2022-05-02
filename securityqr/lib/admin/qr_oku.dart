@@ -20,13 +20,13 @@ class _qr_oku extends State<qr_oku>{
   Barcode? result;
   QRViewController? controller;
 
-  String tarih = DateFormat('yyyy-MM-dd kk:mm:ss').format(DateTime.now());
+  String tarih = DateFormat('dd/MM/yyyy kk.mm').format(DateTime.now());
   
 
 
   CollectionReference ref = FirebaseFirestore.instance.collection('GirisCikis');
   CollectionReference refqrsec = FirebaseFirestore.instance.collection('qr-security');
-  final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance.collection('GirisCikis').snapshots();
+  //final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance.collection('GirisCikis').snapshots();
 
   late String adsoyad ="";
 
@@ -34,9 +34,9 @@ class _qr_oku extends State<qr_oku>{
     QuerySnapshot querySnapshot = await refqrsec.get();
     if(result!=null){
       for(int i = 0;i<querySnapshot.size;i++){
-      if("${result!.code}" == querySnapshot.docChanges[i].doc['kullanıcıno'].toString()){
+      if(result!.code == querySnapshot.docChanges[i].doc['kullanıcıno'].toString()){
         adsoyad = querySnapshot.docChanges[i].doc['adsoyad'];
-        debugPrint("--------------------------");
+        debugPrint(adsoyad);
         break;
       }
     }
@@ -46,10 +46,10 @@ class _qr_oku extends State<qr_oku>{
       Text("asd");
     }
   }
-  void kullaniciGirisCikis(String adsoyad){
+  void kullaniciGirisCikis(String kadsoyad){
     ref.add({
       'tarih': tarih,
-      'kadsoyad':adsoyad,
+      'kadsoyad':kadsoyad,
       'kno':"${result!.code}",
     });
   }
@@ -68,31 +68,10 @@ class _qr_oku extends State<qr_oku>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Qr Kod Okuma"),
-      ),
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 5,
             child: QRView(key: qrKey, onQRViewCreated: onQRViewCreated),
-        ), 
-        Expanded(
-          flex: 1,
-          child: Center(
-            child: FlatButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              height: 40,
-              child: Text("Sayfaya git"),
-              onPressed: (){
-                
-               
-                goster();
-                
-              }
-            ),
-          ),
         ), 
       ],
     ),
@@ -103,22 +82,22 @@ class _qr_oku extends State<qr_oku>{
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-      });
-     }); 
-  }
-  void goster(){
-    if(result!=null){
+        if(result!=null){
       bilgiGetir();
-      adsoyad = adsoyad;
       //Text("${result!.code}");
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
               //return qr_giris_goruntule("${result!.code}");
-              return qr_giris_goruntule("${result!.code}",tarih,adsoyad);
+              return qr_giris_goruntule(result!.code.toString(),tarih,adsoyad);
             }));
     }
     else{
       Text("scan data");
     }
+      });
+     }); 
+  }
+  void goster(){
+    
   }
   @override
   void dispose(){
