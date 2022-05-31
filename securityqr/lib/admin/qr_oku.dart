@@ -21,37 +21,43 @@ class _qr_oku extends State<qr_oku>{
   QRViewController? controller;
 
   String tarih = DateFormat('dd/MM/yyyy kk.mm').format(DateTime.now());
-  
 
 
   CollectionReference ref = FirebaseFirestore.instance.collection('GirisCikis');
   CollectionReference refqrsec = FirebaseFirestore.instance.collection('qr-security');
   //final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance.collection('GirisCikis').snapshots();
 
-  late String adsoyad ="";
+  late String adsoyad = "";
 
-  void bilgiGetir()async{
+  void databaseGuncelle()async{
     QuerySnapshot querySnapshot = await refqrsec.get();
-    if(result!=null){
-      for(int i = 0;i<querySnapshot.size;i++){
-      if(result!.code == querySnapshot.docChanges[i].doc['kullanıcıno'].toString()){
-        adsoyad = querySnapshot.docChanges[i].doc['adsoyad'];
-        debugPrint(adsoyad);
-        break;
-      }
+      for(int i = 0; i < querySnapshot.size; i++){
+        if(result!.code == querySnapshot.docChanges[i].doc['kullanıcıno'].toString()){
+          adsoyad = querySnapshot.docChanges[i].doc['adsoyad'];
+          debugPrint("sdfsdfgdsffhfhjfghjghjkghjlhjklşjklkhjhfgfd");
+        }
+    }
+  }
+
+  void bilgiGetir(String qrdataa)async{
+    QuerySnapshot querySnapshot = await refqrsec.get();
+      for(int i = 0; i < querySnapshot.size; i++){
+        if(qrdataa == querySnapshot.docChanges[i].doc['kullanıcıno'].toString()){
+          adsoyad = querySnapshot.docChanges[i].doc['adsoyad'];
+          debugPrint(adsoyad);
+          i = querySnapshot.size;
+        }
     }
     kullaniciGirisCikis(adsoyad);
     }
-    else{
-      Text("asd");
-    }
-  }
+
   void kullaniciGirisCikis(String kadsoyad){
     ref.add({
       'tarih': tarih,
       'kadsoyad':kadsoyad,
       'kno':"${result!.code}",
     });
+    databaseGuncelle();
   }
 
   @override
@@ -80,15 +86,19 @@ class _qr_oku extends State<qr_oku>{
   void onQRViewCreated(QRViewController controller){
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
+     
       setState(() {
         result = scanData;
+        controller.pauseCamera();
         if(result!=null){
-      bilgiGetir();
-      //Text("${result!.code}");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
-              //return qr_giris_goruntule("${result!.code}");
-              return qr_giris_goruntule(result!.code.toString(),tarih,adsoyad);
-            }));
+          bilgiGetir(result!.code.toString());
+          //Text("${result!.code}");
+          
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+                  //return qr_giris_goruntule("${result!.code}");
+                  return qr_giris_goruntule(result!.code.toString(),tarih,adsoyad);
+                }));
+                
     }
     else{
       Text("scan data");
@@ -96,9 +106,7 @@ class _qr_oku extends State<qr_oku>{
       });
      }); 
   }
-  void goster(){
-    
-  }
+ 
   @override
   void dispose(){
     controller?.dispose();

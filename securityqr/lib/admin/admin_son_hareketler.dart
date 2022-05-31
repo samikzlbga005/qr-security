@@ -57,6 +57,7 @@ class _admin_son_hareketler extends State<admin_son_hareketler>{
           isFind = true;
       }
   }*/
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,7 +137,7 @@ class _admin_son_hareketler extends State<admin_son_hareketler>{
           return Container(
                 child: ListView.builder(
                 itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context,index){
+                itemBuilder: (context, index){
                   return Container(
                     padding: EdgeInsets.fromLTRB(5,5,5,0),
                     height: 120,
