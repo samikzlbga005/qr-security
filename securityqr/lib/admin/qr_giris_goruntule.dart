@@ -10,12 +10,14 @@ final String kadsoyad;
 
 qr_giris_goruntule(this.Kno,this.tarih,this.kadsoyad);
 
+
   @override
   State<StatefulWidget> createState() => _qr_giris_goruntule();
 
 }
 
 class _qr_giris_goruntule extends State<qr_giris_goruntule>{
+  
   
   @override
   Widget build(BuildContext context) {
