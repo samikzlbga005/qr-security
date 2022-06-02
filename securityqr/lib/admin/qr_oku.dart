@@ -28,6 +28,7 @@ class _qr_oku extends State<qr_oku>{
   //final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance.collection('GirisCikis').snapshots();
 
   late String adsoyad = "";
+  int indexxx = 0;
 
   void databaseGuncelle()async{
     QuerySnapshot querySnapshot = await refqrsec.get();
@@ -38,7 +39,7 @@ class _qr_oku extends State<qr_oku>{
         }
     }
   }
-
+/*
   void bilgiGetir(String qrdataa)async{
     QuerySnapshot querySnapshot = await refqrsec.get();
       for(int i = 0; i < querySnapshot.size; i++){
@@ -49,7 +50,7 @@ class _qr_oku extends State<qr_oku>{
         }
     }
     kullaniciGirisCikis(adsoyad);
-    }
+    }*/
 
   void kullaniciGirisCikis(String kadsoyad){
     ref.add({
@@ -57,6 +58,10 @@ class _qr_oku extends State<qr_oku>{
       'kadsoyad':kadsoyad,
       'kno':"${result!.code}",
     });
+    /*
+    String id = ref.doc().firestore.;
+    debugPrint(id);
+    debugPrint("22222222222222222222222");*/
     databaseGuncelle();
   }
 
@@ -87,11 +92,21 @@ class _qr_oku extends State<qr_oku>{
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
      
-      setState(() {
+      setState(() async{
         result = scanData;
         controller.pauseCamera();
         if(result!=null){
-          bilgiGetir(result!.code.toString());
+          //bilgiGetir(result!.code.toString());
+          QuerySnapshot querySnapshot = await refqrsec.get();
+      for(int i = 0; i < querySnapshot.size; i++){
+        if(result!.code.toString() == querySnapshot.docChanges[i].doc['kullanıcıno'].toString()){
+          adsoyad = querySnapshot.docChanges[i].doc['adsoyad'];
+          debugPrint(adsoyad);
+          i = querySnapshot.size;
+        }
+    }
+    kullaniciGirisCikis(adsoyad);
+          debugPrint("sdgfsfgdsfgfdhgfdgh");
           //Text("${result!.code}");
           
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {

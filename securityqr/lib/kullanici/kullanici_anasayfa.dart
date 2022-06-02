@@ -1,10 +1,12 @@
+
 import 'package:flutter/material.dart';
+import 'package:securityqr/kullanici/kullanici_son_hareketler.dart';
 import 'kullanici_giris.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'dart:math';
 class kullanici_anasayfa extends StatefulWidget{
 
   final String Kisim;
@@ -24,8 +26,32 @@ class kullanici_anasayfa extends StatefulWidget{
 
 class _kullanici_anasayfa extends State<kullanici_anasayfa>{
   bool a = true;
-CollectionReference ref = FirebaseFirestore.instance.collection('qr-security');
+  int random = Random().nextInt(150);
+
+  
+
+  CollectionReference ref = FirebaseFirestore.instance.collection('qr-security');
   final Stream<QuerySnapshot> _userStream = FirebaseFirestore.instance.collection('qr-security').snapshots();
+  CollectionReference refgr = FirebaseFirestore.instance.collection('GirisCikis');
+  CollectionReference refnew = FirebaseFirestore.instance.collection('sd');
+  
+/*
+  void son_hareket_gor()async{
+    QuerySnapshot querySnapshot = await refgr.get();
+     QuerySnapshot querySnapshot2 = await ref.get();
+     refnew.firestore.clearPersistence();
+   // refnew.doc().firestore.clearPersistence();
+    for(int i =0; i < querySnapshot.size;i++){
+      if(widget.Kno.toString() == querySnapshot.docChanges[i].doc['kno']){
+        debugPrint("sdafdfgsdghsrythtryhjtyjtyjtydjdtyjtyjtyujyyyyyyyyyyyyyyyyy");
+        refnew.add({
+          "kno": widget.Kno,
+          "kisim": widget.Kisim,
+          "tarihsaat": querySnapshot.docChanges[i].doc['tarih'].toString(),
+        });
+      }
+    }
+  }*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +95,12 @@ CollectionReference ref = FirebaseFirestore.instance.collection('qr-security');
                 color: Colors.blue,
                 child: Text("Son Hareketler",style: TextStyle(fontSize: 18,color: Colors.white),),
                 onPressed: (){
+                  //son_hareket_gor();
                   Navigator.pushNamed(context, "kullanici_son_hareketler");
+                  /*
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+                    return kullanici_son_hareketler(widget.Kno.toString());
+                  }));*/
                 },
                 ),
               ),
